@@ -99,6 +99,7 @@ nnoremap <leader>gf :!firefox % <CR>
 " Open NERDTree
 map <C-o> :NERDTree
 
+nmap r <C-r>
 
 "Better navigation"
 nnoremap K {
@@ -144,7 +145,7 @@ noremap <Right> <Nop>
 
 " Variable g config
 let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsExpandTrigger="<CR>"
+let g:UltiSnipsExpandTrigger="<C-l>"
 let g:prettier#autoformat = 0
 let g:airline_theme = 'dracula'
 let g:airline_powerline_fonts = 1
@@ -239,6 +240,9 @@ endif
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
+" Expand snippet
+inoremap <silent> <CR> <Plug> (coc-snippets-expand)<CR>
+
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -246,7 +250,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> cK :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
