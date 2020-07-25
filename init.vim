@@ -23,18 +23,7 @@ set t_ZR=^[[23m
 "set showmatch		" Show matching brackets.
 "set ignorecase		" Do case insensitive matching
 set autowrite		" Automatically save before commands like :next and :make
-
-
-
-
-
-
-
-
-
-
-
-
+set mouse=a
 
 "Plugins config"
 call plug#begin('~/.config/nvim/plugged')
@@ -52,7 +41,7 @@ Plug 'Valloric/YouCompleteMe', {'on':[]}
 Plug 'junegunn/fzf',{ 'do':{ -> fzf#install()}}
 Plug 'junegunn/fzf.vim'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 "Linting"
@@ -97,19 +86,33 @@ nnoremap <leader>gf :!firefox % <CR>
 
 
 " Open NERDTree
-map <C-o> :NERDTree
+let g:nerdtree_tabs_open_on_gui_starup=1
+let g:nerdtree_tabs_open_on_new_tab=0
+map <C-o> :NERDTreeToggle <CR>
+" nnoremap <C-o> :NERDTreeClose<CR>
 
 nmap r <C-r>
 
-"Better navigation"
+"Better navigation on Nvim"
 nnoremap K {
 nnoremap J }
 nnoremap H 0
 nnoremap L $
 
+"Better navigation on Nvim+Tmux"
+let g:tmux_navigator_no_mappings = 1
+nmap <silent> <C-h> :TmuxNavigateLeft<cr>
+nmap <silent> <C-j> :TmuxNavigateDown<cr>
+nmap <silent> <C-k> :TmuxNavigateUp<cr>
+nmap <silent> <C-l> :TmuxNavigateRight<cr>
+nmap <silent> <C-\> :TmuxNavigatePrevious<cr>
+
+
 
 "Insert line below "
 nmap <CR> o<Esc>
+
+nmap <Tab> gt
 
 nnoremap ci{ cib
 nnoremap ci( cip
@@ -131,7 +134,8 @@ nnoremap <Leader>t :BTags<CR>
 nnoremap <Leader>T :Tags<CR>
 
 "Prettier Config"
-nnoremap <C-i> <Esc><Esc>:Prettier<CR>
+" nnoremap <leader>p <Esc><Esc>:Prettier<CR>
+nmap <Leader>p <Plug>(Prettier)
 
 
 nnoremap <leader>pv :NERDTree v <bar> :Ex <bar> :vertical resize 30<CR>
@@ -241,7 +245,8 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " Expand snippet
-inoremap <silent> <CR> <Plug> (coc-snippets-expand)<CR>
+inoremap <silent> <C-l> <Plug>(coc-snippets-expand)<CR>
+
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -334,5 +339,5 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+" nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
