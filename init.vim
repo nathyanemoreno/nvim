@@ -1,9 +1,4 @@
-"Vim standard configs"
-"
-set nonu
-set relativenumber
-set t_Co=256
-set laststatus=2
+"set -g @pluseset -g @plutatus=2
 set noshowmode
 set noswapfile
 set tabstop=4 softtabstop=4
@@ -60,6 +55,7 @@ Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
 Plug 'jiangmiao/auto-pairs'
 
+Plug 'ap/vim-css-color'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html']
@@ -76,14 +72,25 @@ function! LightlineBufferLine()
 endfunction
 call plug#end()
 
-let g:dracula_italic = 1
-colorscheme dracula
+" Mappings
 
 let g:mapleader = " "
+let g:dracula_italic = 1
+colorscheme dracula
+autocmd InsertEnter * set cul 
+autocmd InsertLeave * set nocul
+set guicursor=n-i-v-c:block-Cursor
+set guicursor+=a:blinkon0
+" set guicursor+=i:ver100-iCursor
+" set guicursor+=n-v-c:blinkon0
+" set guicursor+=i:blinkwait10
+
+" highlight CursorLine ctermbg=238 ctermfg=None
+" highlight iCursor guifg=white guibg=steelblue
+
 
 " Open in firefox 
 nnoremap <leader>gf :!firefox % <CR>
-
 
 " Open NERDTree
 let g:nerdtree_tabs_open_on_gui_starup=1
@@ -111,8 +118,10 @@ nmap <silent> <C-\> :TmuxNavigatePrevious<cr>
 
 "Insert line below "
 nmap <CR> o<Esc>
+imap jj <Esc>
 
 nmap <Tab> gt
+nmap \ :noh<CR>
 
 nnoremap ci{ cib
 nnoremap ci( cip
@@ -121,8 +130,6 @@ nnoremap ci{ cic
 
 nmap -<Space> -><Space>
 
-" command! -bang -nargs=* Files
-"   \ call fzf#run(fzf#wrap({'source': 'rg --files --hidden --no-ignore-vcs --glob "!{node_modules/*,.git/*}"', 'down': '40%', 'options': '--expect=ctrl-t,ctrl-x,ctrl-v --multi --reverse' }))
 
 "FZF Config"
 map <C-p> <Esc><Esc>:Files<CR>
@@ -133,19 +140,26 @@ nnoremap <Leader>h :History<CR>
 nnoremap <Leader>t :BTags<CR>
 nnoremap <Leader>T :Tags<CR>
 
+" command! -bang -nargs=* Files
+"   \ call fzf#run(fzf#wrap({'source': 'rg --files --hidden --no-ignore-vcs --glob "!{node_modules/*,.git/*}"', 'down': '40%', 'options': '--expect=ctrl-t,ctrl-x,ctrl-v --multi --reverse' }))
+
+
 "Prettier Config"
 " nnoremap <leader>p <Esc><Esc>:Prettier<CR>
 nmap <Leader>p <Plug>(Prettier)
 
-
 nnoremap <leader>pv :NERDTree v <bar> :Ex <bar> :vertical resize 30<CR>
-
 
 "Desablead keys
 noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
+
+" Mapping for command mode
+cmap tb<Tab><leader> tabedit<Space>
+cmap sb<Tab><leader> %s///g
+cmap sl<Tab><leader> s///g
 
 " Variable g config
 let g:UltiSnipsEditSplit="vertical"
